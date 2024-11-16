@@ -1,0 +1,37 @@
+ninja: Entering directory `/Users/nikhilmalkari/Documents/OpenSourceContributions/scikit-learn/build'
+[1/21] Linking target sklearn/preprocessing/_target_encoder_fast.cpython-311-darwin.so
+[2/21] Linking target sklearn/neighbors/_kd_tree.cpython-311-darwin.so
+[3/21] Linking target sklearn/neighbors/_ball_tree.cpython-311-darwin.so
+[4/21] Compiling C object sklearn/svm/_liblinear.cpython-311-darwin.so.p/meson-generated_sklearn_svm__liblinear.pyx.c.o
+FAILED: sklearn/svm/_liblinear.cpython-311-darwin.so.p/meson-generated_sklearn_svm__liblinear.pyx.c.o 
+cc -Isklearn/svm/_liblinear.cpython-311-darwin.so.p -Isklearn/svm -I../sklearn/svm -I../sklearn/svm/src/newrand -I../sklearn/svm/src/liblinear -Isklearn -Isklearn/utils -I/Users/nikhilmalkari/anaconda3/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -Wall -Winvalid-pch -std=c11 -O0 -g -Wno-unused-but-set-variable -Wno-unused-function -Wno-conversion -Wno-misleading-indentation -MD -MQ sklearn/svm/_liblinear.cpython-311-darwin.so.p/meson-generated_sklearn_svm__liblinear.pyx.c.o -MF sklearn/svm/_liblinear.cpython-311-darwin.so.p/meson-generated_sklearn_svm__liblinear.pyx.c.o.d -o sklearn/svm/_liblinear.cpython-311-darwin.so.p/meson-generated_sklearn_svm__liblinear.pyx.c.o -c sklearn/svm/_liblinear.cpython-311-darwin.so.p/sklearn/svm/_liblinear.pyx.c
+sklearn/svm/_liblinear.cpython-311-darwin.so.p/sklearn/svm/_liblinear.pyx.c:1224:10: fatal error: 'liblinear_helper.c' file not found
+#include "liblinear_helper.c"
+         ^~~~~~~~~~~~~~~~~~~~
+1 error generated.
+[5/21] Compiling C object sklearn/svm/_libsvm_sparse.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm_sparse.pyx.c.o
+FAILED: sklearn/svm/_libsvm_sparse.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm_sparse.pyx.c.o 
+cc -Isklearn/svm/_libsvm_sparse.cpython-311-darwin.so.p -Isklearn/svm -I../sklearn/svm -I../sklearn/svm/src/newrand -I../sklearn/svm/src/libsvm -Isklearn -Isklearn/utils -I/Users/nikhilmalkari/anaconda3/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -Wall -Winvalid-pch -std=c11 -O0 -g -Wno-unused-but-set-variable -Wno-unused-function -Wno-conversion -Wno-misleading-indentation -MD -MQ sklearn/svm/_libsvm_sparse.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm_sparse.pyx.c.o -MF sklearn/svm/_libsvm_sparse.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm_sparse.pyx.c.o.d -o sklearn/svm/_libsvm_sparse.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm_sparse.pyx.c.o -c sklearn/svm/_libsvm_sparse.cpython-311-darwin.so.p/sklearn/svm/_libsvm_sparse.pyx.c
+sklearn/svm/_libsvm_sparse.cpython-311-darwin.so.p/sklearn/svm/_libsvm_sparse.pyx.c:1224:10: fatal error: 'libsvm_sparse_helper.c' file not found
+#include "libsvm_sparse_helper.c"
+         ^~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+[6/21] Compiling C object sklearn/svm/_libsvm.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm.pyx.c.o
+FAILED: sklearn/svm/_libsvm.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm.pyx.c.o 
+cc -Isklearn/svm/_libsvm.cpython-311-darwin.so.p -Isklearn/svm -I../sklearn/svm -I../sklearn/svm/src/newrand -I../sklearn/svm/src/libsvm -Isklearn -Isklearn/utils -I/Users/nikhilmalkari/anaconda3/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -Wall -Winvalid-pch -std=c11 -O0 -g -Wno-unused-but-set-variable -Wno-unused-function -Wno-conversion -Wno-misleading-indentation -MD -MQ sklearn/svm/_libsvm.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm.pyx.c.o -MF sklearn/svm/_libsvm.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm.pyx.c.o.d -o sklearn/svm/_libsvm.cpython-311-darwin.so.p/meson-generated_sklearn_svm__libsvm.pyx.c.o -c sklearn/svm/_libsvm.cpython-311-darwin.so.p/sklearn/svm/_libsvm.pyx.c
+sklearn/svm/_libsvm.cpython-311-darwin.so.p/sklearn/svm/_libsvm.pyx.c:1226:10: fatal error: 'libsvm_helper.c' file not found
+#include "libsvm_helper.c"
+         ^~~~~~~~~~~~~~~~~
+1 error generated.
+[7/21] Compiling Cython source /Users/nikhilmalkari/Documents/OpenSourceContributions/scikit-learn/sklearn/tree/_utils.pyx
+[8/21] Compiling Cython source /Users/nikhilmalkari/Documents/OpenSourceContributions/scikit-learn/sklearn/tree/_criterion.pyx
+performance hint: /Users/nikhilmalkari/Documents/OpenSourceContributions/scikit-learn/sklearn/tree/_criterion.pyx:1696:41: Exception check after calling '__pyx_fuse_1xlogy' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare '__pyx_fuse_1xlogy' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Declare any exception value explicitly for functions in pxd files.
+[9/21] Compiling C object sklearn/tree/_splitter.cpython-311-darwin.so.p/meson-generated_sklearn_tree__splitter.pyx.c.o
+[10/21] Compiling C object sklearn/tree/_partitioner.cpython-311-darwin.so.p/meson-generated_sklearn_tree__partitioner.pyx.c.o
+[11/21] Compiling C++ object sklearn/tree/_tree.cpython-311-darwin.so.p/meson-generated_sklearn_tree__tree.pyx.cpp.o
+ninja: build stopped: subcommand failed.
+INFO: autodetecting backend as ninja
+INFO: calculating backend command to run: /Users/nikhilmalkari/anaconda3/bin/ninja -C /Users/nikhilmalkari/Documents/OpenSourceContributions/scikit-learn/build

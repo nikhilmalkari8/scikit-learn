@@ -13,6 +13,9 @@ from functools import partial
 from itertools import chain
 from numbers import Integral, Real
 
+from sklearn.utils.validation import check_array
+from scipy.sparse import issparse
+
 import numpy as np
 from scipy import sparse
 
@@ -1317,14 +1320,27 @@ class ColumnTransformer(TransformerMixin, _BaseComposition):
 
 
 def _check_X(X):
-    """Use check_array only when necessary, e.g. on lists and other non-array-likes."""
-    if (
-        (hasattr(X, "__array__") and hasattr(X, "shape"))
-        or hasattr(X, "__dataframe__")
-        or sparse.issparse(X)
-    ):
-        return X
-    return check_array(X, ensure_all_finite="allow-nan", dtype=object)
+    """
+    Validates and converts sparse inputs for compatibility with ColumnTransformer.
+    If X is sparse, it must be in a subscriptable format (csr, csc, lil, dok).
+
+    Parameters
+    ----------
+    X : array-like or sparse matrix
+        Input data to validate.
+
+    Returns
+    -------
+    X : array-like or sparse matrix
+        Validated and potentially converted input.
+    """
+    if issparse(X):
+        if hasattr(X, "format") and X.format not in ["csr", "csc", "lil", "dok"]:
+            X = check_array(X, accept_sparse=("csr", "csc", "lil", "dok"), dtype=None, ensure_2d=True)
+    else:
+        X = check_array(X, ensure_2d=True, dtype=None)
+    return X
+
 
 
 def _is_empty_column_selection(column):

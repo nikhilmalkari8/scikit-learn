@@ -1491,6 +1491,77 @@ def test_make_column_selector_error():
     with pytest.raises(ValueError, match=msg):
         selector(X)
 
+def test_column_transformer_dia_format():
+    from scipy.sparse import dia_array
+    import numpy as np
+    from sklearn.compose import ColumnTransformer
+
+    # Create a dia sparse matrix
+    rng = np.random.RandomState(0)
+    X = rng.rand(10, 3)
+    X_dia = dia_array(X)
+
+    # Create a simple ColumnTransformer
+    transformer = ColumnTransformer(transformers=[("passthrough", "passthrough", [0, 1])])
+
+    # Fit and transform
+    try:
+        X_trans = transformer.fit_transform(X_dia)
+        assert X_trans.shape == (10, 2)  # Expecting 2 columns to be passed through
+    except Exception as e:
+        pytest.fail(f"ColumnTransformer failed on dia format: {e}")
+
+
+def test_column_transformer_coo_bsr_format():
+    from scipy.sparse import coo_matrix, bsr_matrix
+    import numpy as np
+    from sklearn.compose import ColumnTransformer
+
+    # Create sparse matrices in coo and bsr formats
+    rng = np.random.RandomState(1)
+    X = rng.rand(10, 4)
+    X_coo = coo_matrix(X)
+    X_bsr = bsr_matrix(X)
+
+    transformer = ColumnTransformer(transformers=[("passthrough", "passthrough", [0, 2, 3])])
+
+    # Fit and transform for coo
+    try:
+        X_trans_coo = transformer.fit_transform(X_coo)
+        assert X_trans_coo.shape == (10, 3)  # Expecting 3 columns to be passed through
+    except Exception as e:
+        pytest.fail(f"ColumnTransformer failed on coo format: {e}")
+
+    # Fit and transform for bsr
+    try:
+        X_trans_bsr = transformer.fit_transform(X_bsr)
+        assert X_trans_bsr.shape == (10, 3)  # Expecting 3 columns to be passed through
+    except Exception as e:
+        pytest.fail(f"ColumnTransformer failed on bsr format: {e}")
+
+
+def test_column_transformer_sparse_output():
+    from scipy.sparse import csr_matrix
+    import numpy as np
+    from sklearn.compose import ColumnTransformer
+    from sklearn.preprocessing import StandardScaler
+
+    # Create sparse input matrix
+    X = csr_matrix([[1, 0, 3], [4, 0, 6], [7, 0, 9]])
+    y = [1, 0, 1]
+
+    transformer = ColumnTransformer(
+        transformers=[("scaler", StandardScaler(), [0, 2])],
+        sparse_threshold=0.5,
+    )
+
+    # Fit and transform
+    X_trans = transformer.fit_transform(X, y)
+
+    assert X_trans.shape == (3, 2)
+    assert isinstance(X_trans, csr_matrix)  # Output should be sparse
+
+
 
 def test_make_column_selector_pickle():
     pd = pytest.importorskip("pandas")
